@@ -18,14 +18,15 @@ function App() {
     //axios.patch()
   };
 
-  const Delete = (_id) => {
+  const Delete = async (_id) => {
     console.log(_id);
-    // axios.delete();
+    // const delete = await axios.post("http://localhost:5000/delete");
   };
 
-  const Add = () => {
+  const Add = async () => {
     console.log(addTodo);
-    // axios.post();
+    const addTodo = await axios.post("http://localhost:5000/add", value);
+    console.log(task)
   };
 
   const toggleDone = (_id, isDone) => {
