@@ -4,6 +4,16 @@ import axios from "axios";
 import { EditIcon, DeleteIcon } from "./icons/icons";
 
 function App() {
+  const { task, setTask } = useState({ text: " ", isDone: "" });
+  const {data , setData} = useState()
+  const addTask = async () => {
+    const user = await axios.post("http://localhost5000/", {
+      text: task.text,
+      isDone: task.isDone,
+    });
+    setTask({ text: " ", isDone: "" });
+  };
+
   const [list, setList] = useState([
     { text: "example data", isDone: true, _id: "anyid" },
   ]);
@@ -20,28 +30,37 @@ function App() {
 
   const Delete = (_id) => {
     console.log(_id);
-    // axios.delete();
+    axios.delete("http://localhost:8001/delete", { id: _id });
   };
 
-  const Add = () => {
-    console.log(addTodo);
-    // axios.post();
-  };
+  // const Add = () => {
+  //   console.log(addTodo);
+  //   // axios.post();
+  // };
 
   const toggleDone = (_id, isDone) => {
     console.log(_id, isDone);
     //axios.patch()
   };
-
   useEffect(() => {
-    // axios
-    //   .get("Your backend URL")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setList(data.data);
-    //   });
-  }, []);
+    const getData = async () => {
+      try {
+        console.log(task);
+        const user = await axios.get("http://localhost:8001/getTask");
+        setData(user);
+        console.log("asdf", user);
+        setList(user.data);
+        console.log(user);
+        // localStorage.setItem("", user.data.data._id);
+        if (user) {
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+  }, [task]);
+
 
   return (
     <div className="container">
@@ -76,7 +95,7 @@ function App() {
           placeholder="what's next?"
           onChange={(e) => setAddTodo(e.target.value)}
         />
-        <div className="button" onClick={() => Add()}>
+        <div className="button" onClick={() => addTask()}>
           Add task
         </div>
       </div>
