@@ -1,7 +1,7 @@
 {
   "name": "to-do-list",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Setup",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,5 +25,8 @@
     "hooks": {
       "pre-commit": "bash .husky/pre-commit"
     }
+  },
+  "dependencies": {
+    "nodemon": "^2.0.22"
   }
 }
