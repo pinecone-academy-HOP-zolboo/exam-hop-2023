@@ -4,43 +4,52 @@ import axios from "axios";
 import { EditIcon, DeleteIcon } from "./icons/icons";
 
 function App() {
-  const [list, setList] = useState([
-    { text: "example data", isDone: true, _id: "anyid" },
-  ]);
+  const [list, setList] = useState([]);
   const [checkedCounter, setCheckedCounter] = useState(0);
-  const [addTodo, setAddTodo] = useState("");
+  const [addTodo, setAddTodo] = useState({ text: "", isDone: false });
 
-  const Edit = (_id, text) => {
+  const Edit = async (_id, text) => {
     const inputValue = window.prompt("Edit", text);
     if (!inputValue) return;
 
     console.log(inputValue);
-    //axios.patch()
+
+    await axios.patch(`http://localhost:5000/update/${_id}`, {
+      text: inputValue
+    });
+    getList()
   };
 
-  const Delete = (_id) => {
+  const Delete = async (_id) => {
     console.log(_id);
-    // axios.delete();
+    await axios.delete(`http://localhost:5000/delete/${_id}`);
+    getList()
   };
 
-  const Add = () => {
+  const Add = async () => {
     console.log(addTodo);
-    // axios.post();
+    await axios.post("http://localhost:5000/add", addTodo)
+    getList()
   };
 
-  const toggleDone = (_id, isDone) => {
-    console.log(_id, isDone);
-    //axios.patch()
+  const toggleDone = async (_id, isDone) => {
+    await axios.patch(`http://localhost:5000/checked/${_id}`, {
+      isDone: true
+    })
+    setCheckedCounter(checkedCounter => checkedCounter+1)
+    // if(checkedCounter === list.length) return list.length;
+
+    console.log(isDone)
+    getList()
   };
+
+  const getList = async () => {
+    const res = await axios.get("http://localhost:5000/list")
+    setList(res.data)
+  }
 
   useEffect(() => {
-    // axios
-    //   .get("Your backend URL")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     setList(data.data);
-    //   });
+    getList()
   }, []);
 
   return (
@@ -74,7 +83,7 @@ function App() {
         ))}
         <input
           placeholder="what's next?"
-          onChange={(e) => setAddTodo(e.target.value)}
+          onChange={(e) => setAddTodo({ ...addTodo, text: e.target.value })}
         />
         <div className="button" onClick={() => Add()}>
           Add task
