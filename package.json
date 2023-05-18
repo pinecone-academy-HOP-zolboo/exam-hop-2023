@@ -16,11 +16,5 @@
   "bugs": {
     "url": "https://github.com/kem444/exam-hop-2023/issues"
   },
-  "homepage": "https://github.com/kem444/exam-hop-2023#readme",
-  "husky": {
-    "hooks": {
-        "pre-commit": "./commands/pre-commit",
-        "pre-push": "./commands/pre-push $HUSKY_GIT_STDIN"
-    }
-  }
+  "homepage": "https://github.com/kem444/exam-hop-2023#readme"
 }
