@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useNavigation } from "react";
 import "./App.css";
 import axios from "axios";
 import { EditIcon, DeleteIcon } from "./icons/icons";
@@ -8,23 +8,60 @@ function App() {
     { text: "example data", isDone: true, _id: "anyid" },
   ]);
   const [checkedCounter, setCheckedCounter] = useState(0);
+  const [data, setData] = useState();
   const [addTodo, setAddTodo] = useState("");
+  const [form, setForm] = useState({ name: "", isDone: "", createdDate: "" });
+  const addTask = async () => {
+    try {
+      console.log(form);
+      const user = await axios.post("http://localhost:8001/", {
+        name: form.name,
+        isDone: form.isDone,
+        createdDate: form.createdDate,
+      });
+      setForm({ password: "", email: "" });
+      console.log(user);
+      // localStorage.setItem("", user.data.data._id);
+      if (user) {
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        console.log(form);
+        const user = await axios.get("http://localhost:8001/getTask");
+        setData(user);
+        console.log("asdf", user);
+        setList(user.data);
+        console.log(user);
+        // localStorage.setItem("", user.data.data._id);
+        if (user) {
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getData();
+  }, [form]);
   const Edit = (_id, text) => {
     const inputValue = window.prompt("Edit", text);
     if (!inputValue) return;
 
-    console.log(inputValue);
+    // console.log(inputValue);
     //axios.patch()
   };
 
   const Delete = (_id) => {
     console.log(_id);
-    // axios.delete();
+    axios.delete("http://localhost:8001/deleteTask", { id: _id });
   };
 
   const Add = () => {
-    console.log(addTodo);
+    // console.log(addTodo);
     // axios.post();
   };
 
@@ -76,7 +113,7 @@ function App() {
           placeholder="what's next?"
           onChange={(e) => setAddTodo(e.target.value)}
         />
-        <div className="button" onClick={() => Add()}>
+        <div className="button" onClick={() => addTask()}>
           Add task
         </div>
       </div>
