@@ -10,23 +10,16 @@ function App() {
   const [checkedCounter, setCheckedCounter] = useState(0);
   const [data, setData] = useState();
   const [addTodo, setAddTodo] = useState("");
-  const [form, setForm] = useState({ name: "", isDone: "", createdDate: "" });
+  const [form, setForm] = useState({ text: "", isDone: "", createdDate: "" });
   const addTask = async () => {
-    try {
-      console.log(form);
-      const user = await axios.post("http://localhost:8001/", {
-        name: form.name,
-        isDone: form.isDone,
-        createdDate: form.createdDate,
-      });
-      setForm({ password: "", email: "" });
-      console.log(user);
-      // localStorage.setItem("", user.data.data._id);
-      if (user) {
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    console.log(form);
+    const user = await axios.post("http://localhost:8001/", {
+      text: form.name,
+      isDone: form.isDone,
+      createdDate: form.createdDate,
+    });
+    setForm({ text: "", isDone: "", createdDate: "" });
+    console.log(user);
   };
 
   useEffect(() => {
