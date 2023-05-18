@@ -53,4 +53,4 @@
   - `POST http://localhost:5000/add` / 1 оноо /
   - `DELETE http://localhost:5000/delete` / 1 оноо /
   - `PATCH http://localhost:5000/checked` / 1 оноо /
-  - `PATCH http://loca lhost:5000/update` / 2 оноо /
+  - `PATCH http://localhost:5000/update` / 2 оноо /
