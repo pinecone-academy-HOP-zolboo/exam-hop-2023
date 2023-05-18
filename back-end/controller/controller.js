@@ -10,18 +10,22 @@ export const createList = async (req, res) => {
 };
 
 export const updateList = async (req, res) => {
-  const { id } = req.params;
-  await taskModel.findByIdAndUpdate(id, req.body);
+  const { _id } = req.params;
+  const list = await taskModel.findByIdAndUpdate(_id, { ...req.body });
 
-  res.status(200).json("list has successfully updated");
+  res.send(list + "has sucessfully updated");
 };
 export const getTask = async (req, res) => {
   const id = req.body;
   const list = await taskModel.find(id);
-  res.status(200).json(list);
+  res.send(list);
 };
 export const deleteTask = async (req, res) => {
   const { id } = req.params;
   const task = await taskModel.findByIdAndDelete(id);
   res.status(200).json({ message: "task deleted" });
 };
+// export const checked = async (req, res) => {
+//   const isDone = req.body;
+//   const change = await isDone.up
+// }
