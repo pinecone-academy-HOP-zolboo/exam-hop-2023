@@ -4,6 +4,12 @@
 
 Дараах зааврын дагуу todo list service бичих ба хийж дуусад урьдчилан бэлдсэн [Front-end](../front-end/) кодтой холбох юм.
 
+## Setup
+
+1. Mongodb database үүсгэх
+2. Express project үүсгэх
+3. mongodb connection string- ээ кодон дотроо явуулна.
+
 ## A variant
 
 - `GET http://localhost:5000` руу хандахад ‘Todo list backend’ гэж буцаах. / 1 оноо /
@@ -38,13 +44,13 @@
   - Mongoose query бичсэн байна. / 1 оноо /
   - Query-ээс авсан утгаа буцаана. / 1 оноо /
 - Router ashiglasan eseh / 3 оноо /
-- Frontend холбох / 7 оноо /
-    
+- Frontend холбох
+
   Дараах endpoint-уудыг frontend дээр ашигласан байх
-  
+
   - `GET http://localhost:5000/list` / 1 оноо /
-  - `GET http://localhost:5000/count` / 1 оноо / 
-  - `GET http://localhost:5000/add` / 1 оноо /
-  - `GET http://localhost:5000/delete` / 1 оноо / 
-  - `GET http://localhost:5000/checked` / 1 оноо / 
-  - `GET http://loca lhost:5000/update`  / 2 оноо /
+  - `GET http://localhost:5000/count` / 1 оноо /
+  - `POST http://localhost:5000/add` / 1 оноо /
+  - `DELETE http://localhost:5000/delete` / 1 оноо /
+  - `PATCH http://localhost:5000/checked` / 1 оноо /
+  - `PATCH http://loca lhost:5000/update` / 2 оноо /
