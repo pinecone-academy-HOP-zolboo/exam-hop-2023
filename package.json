@@ -1,0 +1,26 @@
+{
+  "name": "to-do-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kem444/exam-hop-2023.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kem444/exam-hop-2023/issues"
+  },
+  "homepage": "https://github.com/kem444/exam-hop-2023#readme",
+  "husky": {
+    "hooks": {
+        "pre-commit": "./commands/pre-commit",
+        "pre-push": "./commands/pre-push $HUSKY_GIT_STDIN"
+    }
+  }
+}
