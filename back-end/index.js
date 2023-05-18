@@ -1,19 +1,25 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const dotenv = require ('dotenv').config()
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const connect = require("./db");
+const { testRouter } = require("./routers/test.routes");
 
-const app = express()
+const port = process.env.PORT || 7070;
 
-app.use(express.json())
+const app = express();
 
-const PORT = process.env.PORT || 5000;
+connect();
 
-const todoItemRoute = require('./routers/todoItems')
+app.use(cors());
+app.use(express.json());
+app.use(testRouter);
+app.use(express.json());
+app.use(express.urlencoded());
 
-mongoose.connect(process.env.DB_CONNECT)
-.then (() => console.log("Database is connected"))
-.catch(err => console.log(err))
+app.get("/", (_req, res) => {
+  res.send("Todo list backend");
+});
 
-app.use('/', todoItemRoute)
-
-app.listen(PORT, () => console.log("Server connected"));
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
